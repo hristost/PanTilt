@@ -1,0 +1,6 @@
+framework module Pods_PanTilt_Example {
+  umbrella header "Pods-PanTilt_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module PanTilt {
+  umbrella header "PanTilt-umbrella.h"
+
+  export *
+  module * { export * }
+}

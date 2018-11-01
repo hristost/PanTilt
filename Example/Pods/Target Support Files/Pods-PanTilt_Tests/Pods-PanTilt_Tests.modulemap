@@ -1,0 +1,6 @@
+framework module Pods_PanTilt_Tests {
+  umbrella header "Pods-PanTilt_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

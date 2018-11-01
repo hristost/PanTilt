@@ -1,0 +1,31 @@
+PODS:
+  - Nimble (7.3.1)
+  - PanTilt (0.1.0):
+    - SwifterSwift/CoreGraphics
+  - Quick (1.2.0)
+  - SwifterSwift/CoreGraphics (4.5.0)
+
+DEPENDENCIES:
+  - Nimble (~> 7.3.1)
+  - PanTilt (from `../`)
+  - Quick (~> 1.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Nimble
+    - Quick
+    - SwifterSwift
+
+EXTERNAL SOURCES:
+  PanTilt:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
+  PanTilt: 4a95d595162dc8c7e98084c3cca7b3c522b0530d
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  SwifterSwift: 45339f9100181f0ca1d9b46248e45d0879a48596
+
+PODFILE CHECKSUM: 735520f1dd1fa277e631ccd08ba07ca52d24efe6
+
+COCOAPODS: 1.5.3
