@@ -113,7 +113,6 @@ public class ZoomPanGestureRecognizer: UIGestureRecognizer {
 //            //            initialTouchB = B.applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
 //        }
         //        canvasView.snapZoom(gestureCenter: initialTouchCenter)
-        canvasView.setNeedsDisplay()
     }
 
     override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {

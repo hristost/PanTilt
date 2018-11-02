@@ -20,6 +20,14 @@ class ViewController: UIViewController {
         let zoomGesture = ZoomPanGestureRecognizer(view: canvasView)
         canvasView.addGestureRecognizer(zoomGesture)
         canvasView.isUserInteractionEnabled = true
+        let displayLink = CADisplayLink(target: self, selector: #selector(refresh(_:)))
+        displayLink.isPaused = false
+        displayLink.add(to: .current, forMode: .default)
+    }
+
+    @objc func refresh(_ link: CADisplayLink) {
+        canvasView.setNeedsDisplay()
+
     }
 
     override func didReceiveMemoryWarning() {
