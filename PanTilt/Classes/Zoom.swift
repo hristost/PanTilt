@@ -10,14 +10,14 @@ import SwifterSwift
 /// Describes the position of the canvas in reference to the view it is in
 public struct CanvasZoom {
     /// Which point of the canvas is in the center of the view
-    var center: CGPoint = .zero
+    public var center: CGPoint = .zero
     /// Zoom level: how many pixels on the view coresspond to a pixel in the canvas
-    var scale: CGFloat = 1
+    public var scale: CGFloat = 1
     /// The angle of the canvas in the containing view.
     /// * `0` means the canvas is not rotated
     /// * `π/2` means it's been rotated 90º clockwise
     /// * `π` means it's been rotated 180º
-    var angle: CGFloat = 0
+    public var angle: CGFloat = 0
 
     public init() {
 
