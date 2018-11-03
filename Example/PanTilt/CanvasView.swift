@@ -11,18 +11,18 @@ import PanTilt
 
 enum ZoomAnimation {
     case none
-    case progress(target: CanvasZoom, time: Float)
+    case progress(target: ZoomTransform, time: Float)
 }
 class CanvasView: UIView, ZoomableView {
     var canvasSize = CGSize(width: 400, height: 300)
-    var zoom = CanvasZoom()
+    var zoom = ZoomTransform()
     var zoomRange: ClosedRange<CGFloat> = 0.5...8
     var zoomAnimation: ZoomAnimation = .none
 
-    func setZoom(_ zoom: CanvasZoom, animated: Bool) {
+    func setZoom(_ zoom: ZoomTransform, animated: Bool) {
         self.zoomAnimation = .none
         if animated {
-            self.zoomAnimation = .progress(target: zoom, time: 200)
+            self.zoomAnimation = .progress(target: zoom, time: 100)
         } else {
             self.zoom = zoom
         }

@@ -26,9 +26,9 @@ private func beCloseTo(_ expectedValue: CGAffineTransform, within delta: CGFloat
         )
     }
 }
-private extension CanvasZoom {
-    static func random() -> CanvasZoom {
-        var zoom = CanvasZoom()
+private extension ZoomTransform {
+    static func random() -> ZoomTransform {
+        var zoom = ZoomTransform()
         zoom.scale = CGFloat(Float.random(in: 0.1...10))
         zoom.angle = CGFloat(Float.random(in: -10...10))
         zoom.center = CGPoint(x: CGFloat(Float.random(in: -100...1000)), y: CGFloat(Float.random(in: -100...1000)))
@@ -38,19 +38,19 @@ private extension CanvasZoom {
 
 class ZoomTest: QuickSpec {
     override func spec() {
-        describe("matrix") {
+        context("matrix") {
             it("identity") {
                 // Any point on the canvas should remain the same after being converted to view coordinates and back
                 // Any point on the view should remain the same after being converted to canvas coordinates and back
                 for _ in 1...100 {
-                    let zoom = CanvasZoom.random()
+                    let zoom = ZoomTransform.random()
                     expect(zoom.canvasToView().concatenating(zoom.viewToCanvas())).to(beCloseTo(.identity))
                     expect(zoom.viewToCanvas().concatenating(zoom.canvasToView())).to(beCloseTo(.identity))
                 }
             }
             it("scale") {
                 for _ in 1...100 {
-                    let zoom = CanvasZoom.random()
+                    let zoom = ZoomTransform.random()
                     let a = CGPoint(x: 0, y: 100)
                     let b = CGPoint(x: 0, y: 200)
                     let d = (a.applying(zoom.viewToCanvas()) - b.applying(zoom.viewToCanvas()))
@@ -58,10 +58,18 @@ class ZoomTest: QuickSpec {
                 }
             }
         }
+        it("angle range") {
+            var zoom = ZoomTransform.random()
+            zoom.angle = CGFloat(-30).degreesToRadians
+            expect(zoom.angle.radiansToDegrees).to(beCloseTo(330))
+            zoom.angle = CGFloat(380).degreesToRadians
+            expect(zoom.angle.radiansToDegrees).to(beCloseTo(20))
+
+        }
         context("interpolation") {
             it("zero and one") {
-                let a = CanvasZoom.random()
-                let b = CanvasZoom.random()
+                let a = ZoomTransform.random()
+                let b = ZoomTransform.random()
                 expect(a.interpolation(to: b, ratio: 0).angle).to(equal(a.angle))
                 expect(a.interpolation(to: b, ratio: 0).scale).to(equal(a.scale))
                 expect(a.interpolation(to: b, ratio: 0).center).to(equal(a.center))
@@ -70,9 +78,9 @@ class ZoomTest: QuickSpec {
                 expect(a.interpolation(to: b, ratio: 1).center).to(equal(b.center))
             }
             it("angle") {
-                var a = CanvasZoom.random()
+                var a = ZoomTransform.random()
                 a.angle = 0.1
-                var b = CanvasZoom.random()
+                var b = ZoomTransform.random()
                 b.angle = -0.1
                 expect(a.interpolation(to: b, ratio: 0.5).angle).to(beCloseTo(0))
                 b.angle = .pi * 2 - 0.1

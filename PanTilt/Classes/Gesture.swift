@@ -1,5 +1,5 @@
 //
-//  PanTiltGesture.swift
+//  Gesture.swift
 //  PanTilt
 //
 //  Created by Hristo Staykov on 1.11.18.
@@ -16,17 +16,21 @@ private extension CGPoint {
     }
 }
 /// A two finger zoom and pan gesture recognizer to be attached to views that conform to `HSZoomableView`
-public class ZoomPanGestureRecognizer: UIGestureRecognizer {
-    /// The drawing view
-    public var canvasView: UIView & ZoomableView
+public class PanTiltGestureRecognizer: UIGestureRecognizer {
+    /// The view in which is the gesture is operating
+    public var zoomableView: UIView & ZoomableView
+    /// An object that restricts the zoom of the gesture
+    public var zoomSnap: PanTiltGestureRecognizerZoomDelegate?
+
+    /// A gesture that will change the zoom matrix of the specified view. Make sure that you attach it to the same view
     public init(view: UIView & ZoomableView) {
-        self.canvasView = view
+        self.zoomableView = view
         super.init(target: nil, action: nil)
     }
     /// The touches that triggered zoom
     var touchA, touchB: UITouch?
     /// The current zoom matrix at the time the gesture began
-    var initialZoom: CanvasZoom = CanvasZoom()
+    var initialZoom: ZoomTransform = ZoomTransform()
     /// The location of the first touch at the time the gesture started, in canvas coordinates
     var initialTouchA: CGPoint = .zero
     /// The location of the second touch at the time the gesture started, in canvas coordinates
@@ -47,16 +51,16 @@ public class ZoomPanGestureRecognizer: UIGestureRecognizer {
 
             let A, B: CGPoint
             if #available(iOS 9.1, *) {
-                A = a.preciseLocation(in: canvasView)
-                B = b.preciseLocation(in: canvasView)
+                A = a.preciseLocation(in: zoomableView)
+                B = b.preciseLocation(in: zoomableView)
             } else {
-                A = a.location(in: canvasView)
-                B = b.location(in: canvasView)
+                A = a.location(in: zoomableView)
+                B = b.location(in: zoomableView)
             }
 
-            self.initialZoom = canvasView.zoom
-            initialTouchA = A.applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
-            initialTouchB = B.applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
+            self.initialZoom = zoomableView.zoom
+            initialTouchA = A.applying(initialZoom.viewToCanvas(bounds: zoomableView.bounds.size))
+            initialTouchB = B.applying(initialZoom.viewToCanvas(bounds: zoomableView.bounds.size))
         }
     }
 
@@ -73,8 +77,10 @@ public class ZoomPanGestureRecognizer: UIGestureRecognizer {
             touchA = nil
             touchB = nil
             state = .ended
-//            canvasView.setZoom(initialZoom, animated: true)
+        let initialTouchCenter = (initialTouchA + initialTouchB) * 0.5// - initialZoom.center
+            zoomSnap?.endZoom(gesture: self, center: initialTouchCenter)
         }
+
     }
 
     override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
@@ -82,11 +88,11 @@ public class ZoomPanGestureRecognizer: UIGestureRecognizer {
         guard let a = touchA, let b = touchB else { return }
         let A, B: CGPoint
         if #available(iOS 9.1, *) {
-            A = a.preciseLocation(in: canvasView).applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
-            B = b.preciseLocation(in: canvasView).applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
+            A = a.preciseLocation(in: zoomableView).applying(initialZoom.viewToCanvas(bounds: zoomableView.bounds.size))
+            B = b.preciseLocation(in: zoomableView).applying(initialZoom.viewToCanvas(bounds: zoomableView.bounds.size))
         } else {
-            A = a.location(in: canvasView).applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
-            B = b.location(in: canvasView).applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
+            A = a.location(in: zoomableView).applying(initialZoom.viewToCanvas(bounds: zoomableView.bounds.size))
+            B = b.location(in: zoomableView).applying(initialZoom.viewToCanvas(bounds: zoomableView.bounds.size))
         }
         let v1 = A - B
         let v2 = initialTouchA - initialTouchB
@@ -107,13 +113,14 @@ public class ZoomPanGestureRecognizer: UIGestureRecognizer {
         zoom.scale = scale * initialZoom.scale
         zoom.center = zoom.center.applying(matrix)
         zoom.angle = zoom.angle - angle
-        canvasView.setZoom(zoom, animated: false)
-//        if canvasView.correctZoom(gestureCenter: initialTouchCenter) {
+        zoomableView.setZoom(zoom, animated: false)
+        if zoomSnap?.restrictZoom(gesture: self, center: initialTouchCenter) ?? false {
+        }
 //            //            self.initialZoom = canvasView.zoom
 //            //            initialTouchA = A.applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
 //            //            initialTouchB = B.applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
 //        }
-//                canvasView.snapZoom(gestureCenter: initialTouchCenter)
+        self.zoomSnap?.snapZoom(gesture: self, center: initialTouchCenter)
     }
 
     override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {

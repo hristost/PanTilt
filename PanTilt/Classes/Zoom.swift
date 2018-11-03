@@ -8,7 +8,7 @@
 import SwifterSwift
 
 /// Describes the position of the canvas in reference to the view it is in
-public struct CanvasZoom {
+public struct ZoomTransform {
     /// Which point of the canvas is in the center of the view
     public var center: CGPoint = .zero
     /// Zoom level: how many pixels on the view coresspond to a pixel in the canvas
@@ -17,7 +17,16 @@ public struct CanvasZoom {
     /// * `0` means the canvas is not rotated
     /// * `π/2` means it's been rotated 90º clockwise
     /// * `π` means it's been rotated 180º
-    public var angle: CGFloat = 0
+    /// - Invariant: `0 <= angle < 2π`
+    public var angle: CGFloat = 0 {
+        didSet {
+            var remainder = angle.remainder(dividingBy: 2 * .pi)
+            while remainder < 0 {
+                remainder += 2 * .pi
+            }
+            angle = remainder
+        }
+    }
 
     public init() {
 
@@ -46,16 +55,4 @@ public struct CanvasZoom {
     public func viewToCanvas(bounds: CGSize) -> CGAffineTransform {
         return CGAffineTransform(translationX: -bounds.width/2, y: -bounds.height/2).concatenating(self.viewToCanvas())
     }
-}
-
-public protocol ZoomableView where Self: UIView {
-    /// The current zoom level of the view
-    var zoom: CanvasZoom { get }
-    /// Acceptable zoom range
-    var zoomRange: ClosedRange<CGFloat> { get }
-    /// The size of the canvas being zoomed
-    var canvasSize: CGSize { get }
-
-    /// Set the current zoom level as indicated by the gesture recognizer
-    func setZoom(_ zoom: CanvasZoom, animated: Bool)
 }

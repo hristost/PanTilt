@@ -17,6 +17,8 @@
 		1AC5D2CE6FA79327468F53B53D0A9418 /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A574E9E2E1F0FA44B0997077A9D31FE /* AllPass.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		1E2AE2B6202B65E712FE05FB2699BD2C /* ExpectationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8777691F5ABD0CEDAA73D2E8C2E1E3AE /* ExpectationMessage.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		219448C6218CAC4200515CC1 /* ZoomInterpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219448C5218CAC4200515CC1 /* ZoomInterpolation.swift */; };
+		219448C8218D85EF00515CC1 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219448C7218D85EF00515CC1 /* ZoomView.swift */; };
+		219448CA218D862400515CC1 /* GestureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219448C9218D862400515CC1 /* GestureDelegate.swift */; };
 		223CA7D4EDF23874D61C762F6CF51C56 /* NMBExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56DA01431AD9A43CF2B855719FF1355 /* NMBExpectation.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		22948773F0660B81265C2C17A0761F0D /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2ADACF75A8F261AF766919BBAFCEEE /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		24015E2E286E2EFB43226D57C0CFF625 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B077ACE9DFF971880975D29C905BB73 /* Foundation.framework */; };
@@ -63,7 +65,7 @@
 		75C7EDAC32157ED5DFF2FC8626F1B004 /* HooksPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7DDD8BB83B0DFB464F7659B1784B1C /* HooksPhase.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		79FA255F43C9E42470C9720C0604444F /* Nimble-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A0F1C1985ED2502A4808FB2632B0B2 /* Nimble-dummy.m */; };
 		7AA9A7388AF44BB4EB2111CEDB29A666 /* MatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F79590B96C32D76DD2E2B16CBBA93A /* MatchError.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		7CE0E221B5A0B466DB7B77B521936EA5 /* PanTiltGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EAF2B32957994F903CB1FF29F5295 /* PanTiltGesture.swift */; };
+		7CE0E221B5A0B466DB7B77B521936EA5 /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EAF2B32957994F903CB1FF29F5295 /* Gesture.swift */; };
 		8050C10B78F2D1DD98A2F3E250A24AD0 /* CwlDarwinDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC110CC57CD555621FF8F0A18E0B8C /* CwlDarwinDefinitions.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		85107C3BD627EA89CC1EAB25859EF85D /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4E22140AC67E9B52D83FFEF60C775 /* AssertionRecorder.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		8BB547EA28B896375D201BC181A2F8FF /* Behavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AFAF7D6DFF97CF99EF21985D6E7442 /* Behavior.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -205,6 +207,8 @@
 		1D0B8615A50ED75C6AD2D04AA3766238 /* QuickSpec.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QuickSpec.m; path = Sources/QuickObjectiveC/QuickSpec.m; sourceTree = "<group>"; };
 		1D738983CEE0BF328EF2B71513C23C34 /* SuiteHooks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SuiteHooks.swift; path = Sources/Quick/Hooks/SuiteHooks.swift; sourceTree = "<group>"; };
 		219448C5218CAC4200515CC1 /* ZoomInterpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZoomInterpolation.swift; path = PanTilt/Classes/ZoomInterpolation.swift; sourceTree = "<group>"; };
+		219448C7218D85EF00515CC1 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZoomView.swift; path = PanTilt/Classes/ZoomView.swift; sourceTree = "<group>"; };
+		219448C9218D862400515CC1 /* GestureDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureDelegate.swift; sourceTree = "<group>"; };
 		2285C68F1847CAD820A6A55C9424750D /* Example.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Sources/Quick/Example.swift; sourceTree = "<group>"; };
 		23AF4F0FB08D72F7C2CDF5A0022472D5 /* CwlCatchException.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CwlCatchException.m; path = Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m; sourceTree = "<group>"; };
 		256C6252BA5E41A2755E4D782F4EFC40 /* World.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = World.swift; path = Sources/Quick/World.swift; sourceTree = "<group>"; };
@@ -304,7 +308,7 @@
 		B95FE34637AC28A9DF3C4DC3BAA404B8 /* Quick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Quick.h; path = Sources/QuickObjectiveC/Quick.h; sourceTree = "<group>"; };
 		BBB4A4B658E46B53B724552117DF79C2 /* SwifterSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwifterSwift.xcconfig; sourceTree = "<group>"; };
 		BDD886E86B9ED09A3AC3A3C09C53E1AC /* SwifterSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwifterSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE3EAF2B32957994F903CB1FF29F5295 /* PanTiltGesture.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PanTiltGesture.swift; path = PanTilt/Classes/PanTiltGesture.swift; sourceTree = "<group>"; };
+		BE3EAF2B32957994F903CB1FF29F5295 /* Gesture.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Gesture.swift; path = PanTilt/Classes/Gesture.swift; sourceTree = "<group>"; };
 		BE6D67EB4DD0EC15D3ACF0FDBF68D14A /* Quick.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Quick.modulemap; sourceTree = "<group>"; };
 		BF29153A7C8B2D8217C0EFED80D8F8BB /* ToSucceed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToSucceed.swift; path = Sources/Nimble/Matchers/ToSucceed.swift; sourceTree = "<group>"; };
 		BFE593AC263FD7F13702943ECE958FA6 /* BeginWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeginWith.swift; path = Sources/Nimble/Matchers/BeginWith.swift; sourceTree = "<group>"; };
@@ -719,8 +723,10 @@
 		FB36D168D886E95FD02470F8E2FD9A79 /* PanTilt */ = {
 			isa = PBXGroup;
 			children = (
-				BE3EAF2B32957994F903CB1FF29F5295 /* PanTiltGesture.swift */,
+				BE3EAF2B32957994F903CB1FF29F5295 /* Gesture.swift */,
+				219448C9218D862400515CC1 /* GestureDelegate.swift */,
 				68318EFE26D295F2EEB34989B93F0BD1 /* Zoom.swift */,
+				219448C7218D85EF00515CC1 /* ZoomView.swift */,
 				219448C5218CAC4200515CC1 /* ZoomInterpolation.swift */,
 				8C2FD154E4F411CA1539C622AB56DDA9 /* Pod */,
 				AEE1345AF02F1D411912B4C3F9A41CCE /* Support Files */,
@@ -1116,8 +1122,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				219448CA218D862400515CC1 /* GestureDelegate.swift in Sources */,
+				219448C8218D85EF00515CC1 /* ZoomView.swift in Sources */,
 				B37A13AEF0C4D961A3E26936E19D1594 /* PanTilt-dummy.m in Sources */,
-				7CE0E221B5A0B466DB7B77B521936EA5 /* PanTiltGesture.swift in Sources */,
+				7CE0E221B5A0B466DB7B77B521936EA5 /* Gesture.swift in Sources */,
 				9AD78017799AE8CF203EF2811AF23F6D /* Zoom.swift in Sources */,
 				219448C6218CAC4200515CC1 /* ZoomInterpolation.swift in Sources */,
 			);
