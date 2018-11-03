@@ -10,7 +10,7 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 import SwifterSwift
 
-extension CGPoint {
+private extension CGPoint {
     var length: CGFloat {
         return self.distance(from: .zero)
     }
@@ -18,7 +18,7 @@ extension CGPoint {
 /// A two finger zoom and pan gesture recognizer to be attached to views that conform to `HSZoomableView`
 public class ZoomPanGestureRecognizer: UIGestureRecognizer {
     /// The drawing view
-    var canvasView: UIView & ZoomableView
+    public var canvasView: UIView & ZoomableView
     public init(view: UIView & ZoomableView) {
         self.canvasView = view
         super.init(target: nil, action: nil)
@@ -73,6 +73,7 @@ public class ZoomPanGestureRecognizer: UIGestureRecognizer {
             touchA = nil
             touchB = nil
             state = .ended
+//            canvasView.setZoom(initialZoom, animated: true)
         }
     }
 
@@ -106,13 +107,13 @@ public class ZoomPanGestureRecognizer: UIGestureRecognizer {
         zoom.scale = scale * initialZoom.scale
         zoom.center = zoom.center.applying(matrix)
         zoom.angle = zoom.angle - angle
-        canvasView.zoom = zoom
+        canvasView.setZoom(zoom, animated: false)
 //        if canvasView.correctZoom(gestureCenter: initialTouchCenter) {
 //            //            self.initialZoom = canvasView.zoom
 //            //            initialTouchA = A.applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
 //            //            initialTouchB = B.applying(initialZoom.viewToCanvas(bounds: canvasView.bounds.size))
 //        }
-        //        canvasView.snapZoom(gestureCenter: initialTouchCenter)
+//                canvasView.snapZoom(gestureCenter: initialTouchCenter)
     }
 
     override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
