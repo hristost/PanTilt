@@ -43,10 +43,9 @@ class CanvasView: UIView, ZoomableView {
         }
         // Drawing code
         if let context = UIGraphicsGetCurrentContext() {
-            let centerTransformation = CGAffineTransform(translationX: self.frame.width/2, y: self.frame.height/2)
             context.setFillColor(red: 0, green: 0, blue: 0, alpha: 1)
             context.fill(rect)
-            let transform = zoom.canvasToView().concatenating(centerTransformation)
+            let transform = zoom.canvasToView(bounds: self.bounds.size)
             let img = #imageLiteral(resourceName: "canvas")
             context.concatenate(transform)
             context.draw(img.cgImage!, in: CGRect(origin: .zero, size: canvasSize))

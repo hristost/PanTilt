@@ -20,6 +20,7 @@ public struct ZoomTransform {
     /// - Invariant: `0 <= angle < 2π`
     public var angle: CGFloat = 0 {
         didSet {
+            // Whenever the angle is set, make sure it lies between 0 and 2π
             var remainder = angle.remainder(dividingBy: 2 * .pi)
             while remainder < 0 {
                 remainder += 2 * .pi
@@ -32,27 +33,24 @@ public struct ZoomTransform {
 
     }
 
-    /// The matrix which transforms points from canvas to view coordinates, where the center of the view is at `(0, 0)`
-    public func canvasToView() -> CGAffineTransform {
+    /// The matrix which transforms points from canvas to view coordinates
+    /// - Parameters:
+    ///     - bounds: the bounds of the view
+    public func canvasToView(bounds: CGSize) -> CGAffineTransform {
         var t = CGAffineTransform.identity
         t = t.concatenating(CGAffineTransform(translationX: -center.x, y: -center.y))
         t = t.concatenating(CGAffineTransform(scaleX: scale, y: scale))
         t = t.concatenating(CGAffineTransform(rotationAngle: angle))
-        return t
+        return t.concatenating(CGAffineTransform(translationX: bounds.width/2, y: bounds.height/2))
     }
-    /// The matrix which transforms points from canvas to view coordinates
-    public func canvasToView(bounds: CGSize) -> CGAffineTransform {
-        return canvasToView().concatenating(CGAffineTransform(translationX: bounds.width/2, y: bounds.height/2))
-    }
-    /// The matrix which transforms points from normalised view to canvas coordinates
-    public func viewToCanvas() -> CGAffineTransform {
+    
+    /// The matrix which transforms points from view to canvas coordinates
+    /// - Parameters:
+    ///     - bounds: the bounds of the view
+    public func viewToCanvas(bounds: CGSize) -> CGAffineTransform {
         var t = CGAffineTransform(rotationAngle: -angle)
         t = t.concatenating(CGAffineTransform(scaleX: 1/scale, y: 1/scale))
         t = t.concatenating(CGAffineTransform(translationX: center.x, y: center.y))
-        return t
-    }
-    /// The matrix which transforms points from view to canvas coordinates
-    public func viewToCanvas(bounds: CGSize) -> CGAffineTransform {
-        return CGAffineTransform(translationX: -bounds.width/2, y: -bounds.height/2).concatenating(self.viewToCanvas())
+        return CGAffineTransform(translationX: -bounds.width/2, y: -bounds.height/2).concatenating(t)
     }
 }

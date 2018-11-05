@@ -44,8 +44,12 @@ class ZoomTest: QuickSpec {
                 // Any point on the view should remain the same after being converted to canvas coordinates and back
                 for _ in 1...100 {
                     let zoom = ZoomTransform.random()
-                    expect(zoom.canvasToView().concatenating(zoom.viewToCanvas())).to(beCloseTo(.identity))
-                    expect(zoom.viewToCanvas().concatenating(zoom.canvasToView())).to(beCloseTo(.identity))
+                    let bounds = CGSize(width: CGFloat(Float.random(in: 0...1000)),
+                                        height: CGFloat(Float.random(in: 0...1000)))
+                    let a = zoom.canvasToView(bounds: bounds)
+                    let b = zoom.viewToCanvas(bounds: bounds)
+                    expect(a.concatenating(b)).to(beCloseTo(.identity))
+                    expect(b.concatenating(a)).to(beCloseTo(.identity))
                 }
             }
             it("scale") {
@@ -53,7 +57,7 @@ class ZoomTest: QuickSpec {
                     let zoom = ZoomTransform.random()
                     let a = CGPoint(x: 0, y: 100)
                     let b = CGPoint(x: 0, y: 200)
-                    let d = (a.applying(zoom.viewToCanvas()) - b.applying(zoom.viewToCanvas()))
+                    let d = (a.applying(zoom.viewToCanvas(bounds: .zero)) - b.applying(zoom.viewToCanvas(bounds: .zero)))
                     expect(d.length).to(beCloseTo((a-b).length / zoom.scale))
                 }
             }
