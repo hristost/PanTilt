@@ -17,13 +17,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         canvasView = CanvasView(frame: self.view.frame)
+        canvasView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(canvasView)
+
         let zoomGesture = PanTiltGestureRecognizer(view: canvasView)
         zoomGesture.zoomSnap = CanvasViewZoomControl()
         zoomGesture.zoomSnap?.endZoom(gesture: zoomGesture, center: .zero)
 
         canvasView.addGestureRecognizer(zoomGesture)
         canvasView.isUserInteractionEnabled = true
+
         let displayLink = CADisplayLink(target: self, selector: #selector(refresh(_:)))
         displayLink.isPaused = false
         displayLink.add(to: .current, forMode: .default)
