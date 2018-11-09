@@ -16,7 +16,6 @@ enum ZoomAnimation {
 class CanvasView: UIView, ZoomableView {
     var canvasSize = CGSize(width: 400, height: 300)
     var zoom = ZoomTransform()
-    var zoomRange: ClosedRange<CGFloat> = 0.5...8
     var zoomAnimation: ZoomAnimation = .none
 
     func setZoom(_ zoom: ZoomTransform, animated: Bool) {

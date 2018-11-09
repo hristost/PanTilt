@@ -50,7 +50,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		88B2D72749651C8EB7D478DA /* Pods-PanTilt_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PanTilt_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PanTilt_Example/Pods-PanTilt_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		C7AE5F4BB8FD0CEE49D5E9AE /* PanTilt.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PanTilt.podspec; path = ../PanTilt.podspec; sourceTree = "<group>"; };
+		C7AE5F4BB8FD0CEE49D5E9AE /* PanTilt.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PanTilt.podspec; path = ../PanTilt.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CADF033E7B1650BC435245D1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		CC020D8DC2315A13DDC9D288 /* Pods-PanTilt_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PanTilt_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-PanTilt_Example/Pods-PanTilt_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
