@@ -24,13 +24,11 @@ public extension ZoomTransform {
         // https://stackoverflow.com/a/14498790/1646862
         let shortestAngle = ((endAngle-startAngle) + .pi).truncatingRemainder(dividingBy: .pi * 2) - .pi
         // Interpolate zoom scale and center (simple linear interpolation)
-        var newZoom = self
-        newZoom.scale += ratio * (target.scale - self.scale)
-        newZoom.angle += shortestAngle * ratio
+        let scale = self.scale + ratio * (target.scale - self.scale)
+        let angle = self.angle + shortestAngle * ratio
         // The zoom center is in canvas space whereas we want the canvas to move linearly across the screen. That means,
         // while zooming in and out a linear motion on screen may translate to a non-linear movement in canvas space
-        let ratio = (target.scale / self.scale) * ratio
-        newZoom.center += ratio * (target.center - self.center)
-        return newZoom
+        let center = self.center + (target.scale / self.scale) * ratio * (target.center - self.center)
+        return ZoomTransform(center: center, scale: scale, angle: angle)
     }
 }

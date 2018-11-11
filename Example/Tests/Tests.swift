@@ -28,7 +28,7 @@ private func beCloseTo(_ expectedValue: CGAffineTransform, within delta: CGFloat
 }
 private extension ZoomTransform {
     static func random() -> ZoomTransform {
-        var zoom = ZoomTransform()
+        let zoom = ZoomTransform()
         zoom.scale = CGFloat(Float.random(in: 0.1...10))
         zoom.angle = CGFloat(Float.random(in: -10...10))
         zoom.center = CGPoint(x: CGFloat(Float.random(in: -100...1000)), y: CGFloat(Float.random(in: -100...1000)))
@@ -38,6 +38,14 @@ private extension ZoomTransform {
 
 class ZoomTest: QuickSpec {
     override func spec() {
+        it("copy") {
+            let zoom = ZoomTransform.random()
+            let copy: ZoomTransform = ZoomTransform(copying: zoom)
+            expect(zoom.angle).to(equal(copy.angle))
+            expect(zoom.scale).to(equal(copy.scale))
+            expect(zoom.center).to(equal(copy.center))
+
+        }
         context("matrix") {
             it("identity") {
                 // Any point on the canvas should remain the same after being converted to view coordinates and back
@@ -63,7 +71,7 @@ class ZoomTest: QuickSpec {
             }
         }
         it("angle range") {
-            var zoom = ZoomTransform.random()
+            let zoom = ZoomTransform.random()
             zoom.angle = CGFloat(-30).degreesToRadians
             expect(zoom.angle.radiansToDegrees).to(beCloseTo(330))
             zoom.angle = CGFloat(380).degreesToRadians
@@ -75,16 +83,18 @@ class ZoomTest: QuickSpec {
                 let a = ZoomTransform.random()
                 let b = ZoomTransform.random()
                 expect(a.interpolation(to: b, ratio: 0).angle).to(equal(a.angle))
-                expect(a.interpolation(to: b, ratio: 0).scale).to(equal(a.scale))
-                expect(a.interpolation(to: b, ratio: 0).center).to(equal(a.center))
                 expect(a.interpolation(to: b, ratio: 1).angle).to(equal(b.angle))
+                expect(a.interpolation(to: b, ratio: 0).scale).to(equal(a.scale))
                 expect(a.interpolation(to: b, ratio: 1).scale).to(equal(b.scale))
+                // The center of the interpolation depends on the scale, test it only when a and b have the same scale
+                a.scale = b.scale
+                expect(a.interpolation(to: b, ratio: 0).center).to(equal(a.center))
                 expect(a.interpolation(to: b, ratio: 1).center).to(equal(b.center))
             }
             it("angle") {
-                var a = ZoomTransform.random()
+                let a = ZoomTransform.random()
                 a.angle = 0.1
-                var b = ZoomTransform.random()
+                let b = ZoomTransform.random()
                 b.angle = -0.1
                 expect(a.interpolation(to: b, ratio: 0.5).angle).to(beCloseTo(0))
                 b.angle = .pi * 2 - 0.1

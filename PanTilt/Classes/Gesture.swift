@@ -143,7 +143,7 @@ public class PanTiltGestureRecognizer: UIGestureRecognizer {
         matrix = matrix.concatenating(CGAffineTransform(rotationAngle: angle))
         matrix = matrix.concatenating(CGAffineTransform(translationX: initialCenter.x, y: initialCenter.y))
 
-        var zoom = initialZoom
+        let zoom = ZoomTransform(copying: initialZoom)
         zoom.center = zoom.center.applying(matrix)
         zoom.scale = scale * initialZoom.scale
         zoom.angle = zoom.angle - angle

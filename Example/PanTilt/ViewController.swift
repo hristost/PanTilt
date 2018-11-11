@@ -77,7 +77,7 @@ class CanvasViewZoomControl: PanTiltGestureRecognizerZoomDelegate {
 
     func endZoom(gesture: PanTiltGestureRecognizer, center: CGPoint) -> Bool {
         let view = gesture.zoomableView
-        var zoom = view.zoom
+        var zoom = ZoomTransform(copying: view.zoom)
         let scaled = snapScale(view: view, zoom: &zoom, gestureCenter: center)
         let rotated = snapRotation(view: view, zoom: &zoom, gestureCenter: center)
         let moved =  moveBounds(view: view, zoom: &zoom)
