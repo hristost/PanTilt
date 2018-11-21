@@ -18,7 +18,7 @@ private extension CGPoint {
 /// A two finger zoom and pan gesture recognizer to be attached to views that conform to `HSZoomableView`
 public class PanTiltGestureRecognizer: UIGestureRecognizer {
     /// The view in which is the gesture is operating
-    public var zoomableView: UIView & ZoomableView
+    public unowned var zoomableView: UIView & ZoomableView
     /// An object that restricts the zoom of the gesture
     public var zoomSnap: PanTiltGestureRecognizerZoomDelegate?
 
