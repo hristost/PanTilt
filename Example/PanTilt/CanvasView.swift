@@ -42,7 +42,7 @@ class CanvasView: UIView, ZoomableView {
         }
         // Drawing code
         if let context = UIGraphicsGetCurrentContext() {
-            context.setFillColor(red: 0, green: 0, blue: 0, alpha: 1)
+            context.setFillColor(red: 0.05, green: 0.14, blue: 0.2, alpha: 1)
             context.fill(rect)
             let transform = zoom.canvasToView(bounds: self.bounds.size)
             let img = #imageLiteral(resourceName: "canvas")

@@ -49,7 +49,7 @@ class CanvasViewZoomControl: PanTiltGestureRecognizerZoomDelegate {
     var zoomRange: ClosedRange<CGFloat> = 0...8
     var insets: UIEdgeInsets = UIEdgeInsets(top: 70, left: 0, bottom: 0, right: 0)
     func restrictZoom(gesture: PanTiltGestureRecognizer, center gestureCenter: CGPoint) -> Bool {
-        var zoom = gesture.zoomableView.zoom
+        let zoom = gesture.zoomableView.zoom
         var scale: CGFloat = 1
         let angle: CGFloat = 0
         if zoom.scale < self.zoomRange.lowerBound {
