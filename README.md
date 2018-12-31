@@ -11,7 +11,7 @@ A structure for describing zoom and a gesture recognizer that allows for modifyi
 * Two-finger gesture supports zoom, pan and tilt
 
 ## Example
-![Example project running on simulator](demo.gif)
+![Example project running on simulator](https://github.com/hristost/PanTilt/raw/master/demo.gif)
 
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
