@@ -19,6 +19,7 @@
 		219448C6218CAC4200515CC1 /* ZoomInterpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219448C5218CAC4200515CC1 /* ZoomInterpolation.swift */; };
 		219448C8218D85EF00515CC1 /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219448C7218D85EF00515CC1 /* ZoomView.swift */; };
 		219448CA218D862400515CC1 /* GestureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219448C9218D862400515CC1 /* GestureDelegate.swift */; };
+		21E325C021E8C72F00789594 /* ZoomFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E325BF21E8C72F00789594 /* ZoomFit.swift */; };
 		223CA7D4EDF23874D61C762F6CF51C56 /* NMBExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56DA01431AD9A43CF2B855719FF1355 /* NMBExpectation.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		22948773F0660B81265C2C17A0761F0D /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2ADACF75A8F261AF766919BBAFCEEE /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		24015E2E286E2EFB43226D57C0CFF625 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B077ACE9DFF971880975D29C905BB73 /* Foundation.framework */; };
@@ -209,6 +210,7 @@
 		219448C5218CAC4200515CC1 /* ZoomInterpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZoomInterpolation.swift; path = PanTilt/Classes/ZoomInterpolation.swift; sourceTree = "<group>"; };
 		219448C7218D85EF00515CC1 /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZoomView.swift; path = PanTilt/Classes/ZoomView.swift; sourceTree = "<group>"; };
 		219448C9218D862400515CC1 /* GestureDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GestureDelegate.swift; path = PanTilt/Classes/GestureDelegate.swift; sourceTree = "<group>"; };
+		21E325BF21E8C72F00789594 /* ZoomFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZoomFit.swift; path = PanTilt/Classes/ZoomFit.swift; sourceTree = "<group>"; };
 		2285C68F1847CAD820A6A55C9424750D /* Example.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Sources/Quick/Example.swift; sourceTree = "<group>"; };
 		23AF4F0FB08D72F7C2CDF5A0022472D5 /* CwlCatchException.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CwlCatchException.m; path = Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m; sourceTree = "<group>"; };
 		256C6252BA5E41A2755E4D782F4EFC40 /* World.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = World.swift; path = Sources/Quick/World.swift; sourceTree = "<group>"; };
@@ -726,6 +728,7 @@
 				BE3EAF2B32957994F903CB1FF29F5295 /* Gesture.swift */,
 				219448C9218D862400515CC1 /* GestureDelegate.swift */,
 				68318EFE26D295F2EEB34989B93F0BD1 /* Zoom.swift */,
+				21E325BF21E8C72F00789594 /* ZoomFit.swift */,
 				219448C7218D85EF00515CC1 /* ZoomView.swift */,
 				219448C5218CAC4200515CC1 /* ZoomInterpolation.swift */,
 				8C2FD154E4F411CA1539C622AB56DDA9 /* Pod */,
@@ -1122,6 +1125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21E325C021E8C72F00789594 /* ZoomFit.swift in Sources */,
 				219448CA218D862400515CC1 /* GestureDelegate.swift in Sources */,
 				219448C8218D85EF00515CC1 /* ZoomView.swift in Sources */,
 				B37A13AEF0C4D961A3E26936E19D1594 /* PanTilt-dummy.m in Sources */,

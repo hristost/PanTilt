@@ -107,5 +107,35 @@ class ZoomTest: QuickSpec {
                 expect(a.interpolation(to: b, ratio: 0.5).angle).to(beCloseTo(1.5))
             }
         }
+
+
+        it("zoom-to-fit") {
+            let viewSize = CGSize(width: 1024, height: 768)
+            let contentInset = UIEdgeInsets(top: 100, left: 90, bottom: 80, right: 70)
+            let canvasSize = CGSize(width: CGFloat(Float.random(in: 100...1000)), height: CGFloat(Float.random(in: 100...1000)))
+            let zoom = ZoomTransform.random()
+            let fit = zoom.zoomToFit(canvasSize: canvasSize, viewSize: viewSize, contentInset: contentInset, rotation: .maximizeArea)
+
+            // Make sure that the canvas does not go outside the safe area
+            let (w, h) = (canvasSize.width, canvasSize.height)
+            let rectangleCorners = [CGPoint(x: 0, y: 0), CGPoint(x: w, y: 0), CGPoint(x: 0, y: h), CGPoint(x: w, y: h)].map {
+                $0.applying(fit.canvasToView(bounds: viewSize))
+            }
+            let xes = rectangleCorners.map { $0.x }
+            let yes = rectangleCorners.map { $0.y }
+            let minX = xes.min()!
+            let maxX = xes.max()!
+            let minY = yes.min()!
+            let maxY = yes.max()!
+
+            let canvasRect = CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
+            let safeRect = CGRect(origin: .zero, size: viewSize).inset(by: contentInset)
+            expect(safeRect.insetBy(dx: -0.5, dy: -0.5).contains(canvasRect)).to(equal(true))
+
+            // Make sure that the canvas occupies as much as possible of the safe area, that is, the bounding rect of
+            // the canvas matches either the width or height of the safe area
+            expect(min(abs(safeRect.width-canvasRect.width), abs(safeRect.height-canvasRect.height))).to(beCloseTo(0))
+
+        }
     }
 }

@@ -37,6 +37,10 @@ class ViewController: UIViewController {
 
     }
 
+    @IBAction func zoomToFitTapped(_ sender: Any) {
+        canvasView.zoomToFit(rotation: .maximizeArea, animate: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -47,7 +51,6 @@ class ViewController: UIViewController {
 class CanvasViewZoomControl: PanTiltGestureRecognizerZoomDelegate {
     /// Acceptable zoom scale range
     var zoomRange: ClosedRange<CGFloat> = 0...8
-    var insets: UIEdgeInsets = UIEdgeInsets(top: 70, left: 0, bottom: 0, right: 0)
     func restrictZoom(gesture: PanTiltGestureRecognizer, center gestureCenter: CGPoint) -> Bool {
         let zoom = gesture.zoomableView.zoom
         var scale: CGFloat = 1
@@ -135,7 +138,13 @@ class CanvasViewZoomControl: PanTiltGestureRecognizerZoomDelegate {
             return false
         }
         let canvasRect = CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
-        let displayRect = view.bounds.inset(by: self.insets)
+        let insets: UIEdgeInsets
+        if #available(iOS 11.0, *) {
+            insets = view.safeAreaInsets
+        } else {
+            insets = view.layoutMargins
+        }
+        let displayRect = view.bounds.inset(by: insets)
 
         var newCanvasRect = canvasRect
         if newCanvasRect.width < displayRect.width && newCanvasRect.height < displayRect.height {

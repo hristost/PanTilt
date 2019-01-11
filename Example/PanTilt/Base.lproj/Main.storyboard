@@ -22,7 +22,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Pinch to zoom" id="jBh-VE-mda"/>
+                    <navigationItem key="navigationItem" title="Pinch to zoom" id="jBh-VE-mda">
+                        <barButtonItem key="rightBarButtonItem" title="Zoom to fit" id="GVH-2v-SRK">
+                            <connections>
+                                <action selector="zoomToFitTapped:" destination="vXZ-lx-hvc" id="gvu-od-n0c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
