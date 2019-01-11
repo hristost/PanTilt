@@ -26,6 +26,7 @@ class ViewController: UIViewController {
 
         canvasView.addGestureRecognizer(zoomGesture)
         canvasView.isUserInteractionEnabled = true
+        canvasView.zoomToFit(rotation: .rotate(0), animate: false)
 
         let displayLink = CADisplayLink(target: self, selector: #selector(refresh(_:)))
         displayLink.isPaused = false
