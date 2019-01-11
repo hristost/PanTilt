@@ -2,7 +2,7 @@
 
 import Quick
 import Nimble
-import PanTilt
+@testable import PanTilt
 import SwifterSwift
 
 private extension CGPoint {
@@ -121,14 +121,7 @@ class ZoomTest: QuickSpec {
             let rectangleCorners = [CGPoint(x: 0, y: 0), CGPoint(x: w, y: 0), CGPoint(x: 0, y: h), CGPoint(x: w, y: h)].map {
                 $0.applying(fit.canvasToView(bounds: viewSize))
             }
-            let xes = rectangleCorners.map { $0.x }
-            let yes = rectangleCorners.map { $0.y }
-            let minX = xes.min()!
-            let maxX = xes.max()!
-            let minY = yes.min()!
-            let maxY = yes.max()!
-
-            let canvasRect = CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
+            let canvasRect = CGRect(containingPoints: rectangleCorners)!
             let safeRect = CGRect(origin: .zero, size: viewSize).inset(by: contentInset)
             expect(safeRect.insetBy(dx: -0.5, dy: -0.5).contains(canvasRect)).to(equal(true))
 

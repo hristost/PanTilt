@@ -7,6 +7,17 @@
 
 import SwifterSwift
 
+extension CGRect {
+    /// The smallest rectangel containing all given points
+    init?(containingPoints points: [CGPoint]) {
+        let xes = points.map { $0.x }
+        let yes = points.map { $0.y }
+        guard let minX = xes.min(), let maxX = xes.max(), let minY = yes.min(), let maxY = yes.max() else { return nil }
+
+        self.init(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
+    }
+}
+
 public extension ZoomTransform {
 
     /// How to deal with rotation when we try to fit the canvas inside a view
@@ -47,14 +58,8 @@ public extension ZoomTransform {
         let rectangleCorners = [CGPoint(x: 0, y: 0), CGPoint(x: w, y: 0), CGPoint(x: 0, y: h), CGPoint(x: w, y: h)].map {
             $0.applying(result.canvasToView(bounds: viewSize))
         }
-        let xes = rectangleCorners.map { $0.x }
-        let yes = rectangleCorners.map { $0.y }
-        let minX = xes.min()!
-        let maxX = xes.max()!
-        let minY = yes.min()!
-        let maxY = yes.max()!
 
-        let canvasRect = CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
+        let canvasRect = CGRect(containingPoints: rectangleCorners)!
 
         var newCanvasRect = canvasRect
         newCanvasRect.size = canvasRect.size.aspectFit(to: displayRect.size)

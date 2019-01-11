@@ -25,10 +25,16 @@ public extension ZoomTransform {
         let shortestAngle = ((endAngle-startAngle) + .pi).truncatingRemainder(dividingBy: .pi * 2) - .pi
         // Interpolate zoom scale and center (simple linear interpolation)
         let scale = self.scale + ratio * (target.scale - self.scale)
-        let angle = self.angle + shortestAngle * ratio
+        var angle = self.angle + shortestAngle * ratio
         // The zoom center is in canvas space whereas we want the canvas to move linearly across the screen. That means,
         // while zooming in and out a linear motion on screen may translate to a non-linear movement in canvas space
         let center = self.center + (target.scale / self.scale) * ratio * (target.center - self.center)
+        // Make sure angle is within 0, 2π
+        var remainder = angle.remainder(dividingBy: 2 * .pi)
+        while remainder < 0 {
+            remainder += 2 * .pi
+        }
+        angle = remainder
         return ZoomTransform(center: center, scale: scale, angle: angle)
     }
 }
