@@ -15,6 +15,13 @@ enum ZoomAnimation {
 }
 class CanvasView: UIView, ZoomableView {
     var canvasSize = CGSize(width: 400, height: 300)
+    var contentInset: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaInsets
+        } else {
+            return self.layoutMargins
+        }
+    }
     var zoom = ZoomTransform()
     var zoomAnimation: ZoomAnimation = .none
 

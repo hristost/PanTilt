@@ -139,13 +139,7 @@ class CanvasViewZoomControl: PanTiltGestureRecognizerZoomDelegate {
             return false
         }
         let canvasRect = CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
-        let insets: UIEdgeInsets
-        if #available(iOS 11.0, *) {
-            insets = view.safeAreaInsets
-        } else {
-            insets = view.layoutMargins
-        }
-        let displayRect = view.bounds.inset(by: insets)
+        let displayRect = view.bounds.inset(by: view.contentInset)
 
         var newCanvasRect = canvasRect
         if newCanvasRect.width < displayRect.width && newCanvasRect.height < displayRect.height {
