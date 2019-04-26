@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PanTilt'
-  s.version          = '0.2.1'
+  s.version          = '0.3.0'
   s.summary          = 'A structure for describing zoom and a gesture recognizer that allows for modifying it'
 
 # This description is used to generate tags and improve search results.
@@ -32,7 +32,7 @@ A structure for describing zoom and a gesture recognizer that allows for modifyi
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 
   s.source_files = 'PanTilt/Classes/**/*'
   

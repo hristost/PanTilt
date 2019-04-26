@@ -27,7 +27,7 @@ as start or update of zoom gesture.
 attaching it to the `zoomSnap` property of the gesture. You can see how this is done in the example project.
 
 ## Requirements
-* Swift 4.2
+* Swift 5.0
 
 This is an iOS project, but is should be easy to adapt it for macOS too if needed.
 

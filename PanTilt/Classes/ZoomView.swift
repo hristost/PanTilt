@@ -23,7 +23,7 @@ public extension ZoomableView {
     ///     - rotation: Whether to rotate the canvas to maximize area
     ///     - animate: Whether to animate the change
     /// - Note: the `contentInset` property of the view will be used to determine the safe area for the canvas
-    public func zoomToFit(rotation: ZoomTransform.FitRotation, animate: Bool) {
+    func zoomToFit(rotation: ZoomTransform.FitRotation, animate: Bool) {
         let new = zoom.zoomToFit(canvasSize: canvasSize, viewSize: bounds.size, contentInset: contentInset, rotation: rotation)
         self.setZoom(new, animated: animate)
     }

@@ -21,7 +21,7 @@ extension CGRect {
 public extension ZoomTransform {
 
     /// How to deal with rotation when we try to fit the canvas inside a view
-    public enum FitRotation {
+    enum FitRotation {
         /// Keep the rotation as it is
         case keep
         /// Rotate to a specified angle
@@ -36,7 +36,7 @@ public extension ZoomTransform {
     ///     - viewSize: Size of the view
     ///     - contentInset: Edges of the view obscured by other views. The canvas won't occupy those areas
     ///     - rotation: Whether to rotate the canvas to maximize area
-    public func zoomToFit(canvasSize: CGSize, viewSize: CGSize, contentInset: UIEdgeInsets, rotation: FitRotation) -> ZoomTransform {
+    func zoomToFit(canvasSize: CGSize, viewSize: CGSize, contentInset: UIEdgeInsets, rotation: FitRotation) -> ZoomTransform {
         let displayRect = CGRect(origin: .zero, size: viewSize).inset(by: contentInset)
         let result = ZoomTransform(copying: self)
         switch rotation {

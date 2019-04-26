@@ -14,7 +14,7 @@ public extension ZoomTransform {
     ///   - target: the target zoom transform that is to be reached
     ///   - ratio: a value between `0.0` and `1.0` that defines whether the resulting transform is closer to the intial
     ///            (`0.0`) or the final target (`1.0`)
-    @objc public func interpolation(to target: ZoomTransform, ratio: CGFloat) -> ZoomTransform {
+    @objc func interpolation(to target: ZoomTransform, ratio: CGFloat) -> ZoomTransform {
         // Interpolate transformation angle
         // Make sure both angles are in `[0, 2π)`
         let startAngle = self.angle.truncatingRemainder(dividingBy: .pi * 2)
