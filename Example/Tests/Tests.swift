@@ -116,7 +116,7 @@ class ZoomTest: QuickSpec {
             let rectangleCorners = [CGPoint(x: 0, y: 0), CGPoint(x: w, y: 0), CGPoint(x: 0, y: h), CGPoint(x: w, y: h)].map {
                 $0.applying(fit.canvasToView(bounds: viewSize))
             }
-            let canvasRect = CGRect(containingPoints: rectangleCorners)!
+            let canvasRect = CGRect(containingPoints: rectangleCorners)
             let safeRect = CGRect(origin: .zero, size: viewSize).inset(by: contentInset)
             expect(safeRect.insetBy(dx: -0.5, dy: -0.5).contains(canvasRect)).to(equal(true))
 

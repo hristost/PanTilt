@@ -6,13 +6,15 @@
 //
 
 extension CGRect {
-    /// The smallest rectangel containing all given points
-    init?(containingPoints points: [CGPoint]) {
-        let xes = points.map { $0.x }
-        let yes = points.map { $0.y }
-        guard let minX = xes.min(), let maxX = xes.max(), let minY = yes.min(), let maxY = yes.max() else { return nil }
-
-        self.init(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
+    /// The smallest rectangle containing all given points
+    init(containingPoints points: [CGPoint]) {
+        let xs = points.map { $0.x }
+        let ys = points.map { $0.y }
+        if let minX = xs.min(), let maxX = xs.max(), let minY = ys.min(), let maxY = ys.max() {
+            self.init(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
+        } else {
+            self = .zero
+        }
     }
 }
 
@@ -24,7 +26,7 @@ public extension ZoomTransform {
         case keep
         /// Rotate to a specified angle
         case rotate(CGFloat)
-        /// Rotate in such a way that the visible area is maximized
+        /// Rotate in such a way that the visible area is maximized. This rotates the canvas at a multiple of π/2
         case maximizeArea
     }
 
@@ -41,7 +43,7 @@ public extension ZoomTransform {
         case .keep:
             ()
         case .rotate(let angle):
-            self.angle = angle
+            result.angle = angle
         case .maximizeArea:
             // To display as much as possible, rotate to either 0º, 90º, 180º, or 270º
             // We keep the canvas at 0º or 180º if:
@@ -57,8 +59,48 @@ public extension ZoomTransform {
             $0.applying(result.canvasToView(bounds: viewSize))
         }
 
-        let canvasRect = CGRect(containingPoints: rectangleCorners)!
+        let canvasRect = CGRect(containingPoints: rectangleCorners)
 
+        return result.zoomToFit(rectangle: canvasRect, viewSize: viewSize, contentInset: contentInset)
+    }
+    /// Scale, rotate, and position the canvas so the given rectangle is fully visible and fills as much of
+    /// the view as possible
+    /// - Parameters:
+    ///     - rectangle: Rectangle that should be shown
+    ///     - rotation: Rotation of the rectangle relative to its origin
+    ///     - viewSize: Size of the view
+    ///     - contentInset: Edges of the view obscured by other views. The canvas won't occupy those areas
+    func zoomToFit(rectangle rect: CGRect, withRotation rotation: CGFloat, viewSize: CGSize, contentInset: UIEdgeInsets) -> ZoomTransform {
+        let rotationTransform = CGAffineTransform(rotationAngle: rotation)
+        let points = [CGPoint(x: 0, y: 0),
+                      CGPoint(x: rect.width, y: 0),
+                      CGPoint(x: rect.width, y: rect.height),
+                      CGPoint(x: 0, y: rect.height)].map {
+                        $0.applying(rotationTransform) + rect.origin
+                      }
+
+        let result = ZoomTransform(copying: self)
+        result.angle = rotation
+
+        let rectangleCorners = points.map {
+            $0.applying(result.canvasToView(bounds: viewSize))
+        }
+
+        let canvasRect = CGRect(containingPoints: rectangleCorners)
+
+        return result.zoomToFit(rectangle: canvasRect, viewSize: viewSize, contentInset: contentInset)
+    }
+
+    /// Scale and position the canvas so the given rectangle is fully visible and fills as much of
+    /// the view as possible
+    /// - Parameters:
+    ///     - rectangle: Rectangle that should be shown
+    ///     - viewSize: Size of the view
+    ///     - contentInset: Edges of the view obscured by other views. The canvas won't occupy those areas
+    func zoomToFit(rectangle canvasRect: CGRect, viewSize: CGSize, contentInset: UIEdgeInsets) -> ZoomTransform {
+        let result = ZoomTransform(copying: self)
+
+        let displayRect = CGRect(origin: .zero, size: viewSize).inset(by: contentInset)
         var newCanvasRect = canvasRect
         newCanvasRect.size = canvasRect.size.aspectFit(to: displayRect.size)
         newCanvasRect.origin.x = (displayRect.size - newCanvasRect.size).width / 2 + displayRect.minX
@@ -77,6 +119,7 @@ public extension ZoomTransform {
         result.center = result.center.applying(matrix)
         return result
     }
+
 
 }
 
