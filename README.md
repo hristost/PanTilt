@@ -5,10 +5,13 @@
 [![License](https://img.shields.io/cocoapods/l/PanTilt.svg?style=flat)](https://cocoapods.org/pods/PanTilt)
 [![Platform](https://img.shields.io/cocoapods/p/PanTilt.svg?style=flat)](https://cocoapods.org/pods/PanTilt)
 
-A structure for describing zoom and a gesture recognizer that allows for modifying it
-* Can be incorporated into any view used for displaying a photo, drawing canvas, etc.
+A structure for describing zoom and a `UIGestureRecognizer` that allows for modifying it.
+
+* Can be used for any view with custom drawing code. Use this when you need to provide a zoom interaction but can't afford a `UIScrollView`
 * Gives transformation matrices for converting between screen and context coordinates
 * Two-finger gesture supports zoom, pan and tilt
+
+Used in [Amaziograph](https://amaziograph.com).
 
 ## Example
 ![Example project running on simulator](https://github.com/hristost/PanTilt/raw/master/demo.gif)
@@ -28,8 +31,7 @@ attaching it to the `zoomSnap` property of the gesture. You can see how this is 
 
 ## Requirements
 * Swift 5.0
-
-This is an iOS project, but is should be easy to adapt it for macOS too if needed.
+* UIKit
 
 ## Installation
 
