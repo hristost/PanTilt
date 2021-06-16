@@ -21,7 +21,7 @@ public extension ZoomTransform {
         // Find the shortest delta between the angles -- this is not necessarily their difference.
         // Example: If interpolating between `π/6` and `11/6π`, the middle value should be `2π` or `0`
         // https://stackoverflow.com/a/14498790/1646862
-        let shortestAngle = ((endAngle-startAngle) + .pi).truncatingRemainder(dividingBy: .pi * 2) - .pi
+        let shortestAngle = (endAngle - startAngle + 3 * .pi).truncatingRemainder(dividingBy: 2 * .pi) - .pi
         // Interpolate zoom scale and center (simple linear interpolation)
         let scale = self.scale + ratio * (target.scale - self.scale)
         var angle = self.angle + shortestAngle * ratio
