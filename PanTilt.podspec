@@ -42,6 +42,5 @@ A structure for describing zoom and a gesture recognizer that allows for modifyi
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'SwifterSwift/CoreGraphics'
 
 end

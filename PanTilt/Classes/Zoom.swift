@@ -5,8 +5,6 @@
 //  Created by Hristo Staykov on 1.11.18.
 //
 
-import SwifterSwift
-
 /// Describes the position of the canvas in reference to the view it is in
 @objc public class ZoomTransform: NSObject {
     /// Which point of the canvas is in the center of the view

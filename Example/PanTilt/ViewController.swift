@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import PanTilt
-import SwifterSwift
+@testable import PanTilt
 
 class ViewController: UIViewController {
 
@@ -111,12 +110,12 @@ class CanvasViewZoomControl: PanTiltGestureRecognizerZoomDelegate {
     }
     internal func snapRotation(view: UIView & ZoomableView, zoom: inout ZoomTransform, gestureCenter: CGPoint) -> Bool {
         var angle: CGFloat = 0
-        let rotationSnap: [(angle: CGFloat, delta: CGFloat)] = [(0, 7), (90, 7), (180, 7), (270, 7)]
-        for (target, delta) in rotationSnap {
-            let maxAngle = (target + delta).degreesToRadians
-            let minAngle = (target - delta).degreesToRadians
+        let rotationSnap: [CGFloat] = [0, .pi/2, .pi, 3/2 * .pi]
+        for target in rotationSnap {
+            let maxAngle = (target + 0.1)
+            let minAngle = (target - 0.1)
             if zoom.angle < maxAngle && zoom.angle > minAngle {
-                angle = target.degreesToRadians - zoom.angle
+                angle = target - zoom.angle
             }
         }
         var matrix = CGAffineTransform.identity

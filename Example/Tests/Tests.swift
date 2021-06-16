@@ -3,13 +3,8 @@
 import Quick
 import Nimble
 @testable import PanTilt
-import SwifterSwift
 
-private extension CGPoint {
-    var length: CGFloat {
-        return self.distance(from: .zero)
-    }
-}
+
 private func beCloseTo(_ expectedValue: CGAffineTransform, within delta: CGFloat = 0.01) -> Predicate<CGAffineTransform> {
     return Predicate.define { actualExpression in
         let actualValue = try actualExpression.evaluate()
@@ -22,7 +17,7 @@ private func beCloseTo(_ expectedValue: CGAffineTransform, within delta: CGFloat
                 abs(actualValue!.d - expectedValue.d) < delta &&
                 abs(actualValue!.tx - expectedValue.tx) < delta &&
                 abs(actualValue!.ty - expectedValue.ty) < delta,
-            message: .expectedCustomValueTo(errorMessage, "<\(stringify(actualValue))>")
+            message: .expectedCustomValueTo(errorMessage, actual: "<\(stringify(actualValue))>")
         )
     }
 }

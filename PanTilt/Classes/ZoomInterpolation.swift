@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwifterSwift
 
 public extension ZoomTransform {
     /// A zoom transform that is an interpolation between the current one and the given `target`

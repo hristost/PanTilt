@@ -5,8 +5,6 @@
 //  Created by Hristo Staykov on 11.01.19.
 //
 
-import SwifterSwift
-
 extension CGRect {
     /// The smallest rectangel containing all given points
     init?(containingPoints points: [CGPoint]) {

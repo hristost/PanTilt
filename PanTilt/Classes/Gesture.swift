@@ -8,13 +8,7 @@
 import Foundation
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
-import SwifterSwift
 
-private extension CGPoint {
-    var length: CGFloat {
-        return self.distance(from: .zero)
-    }
-}
 /// A two finger zoom and pan gesture recognizer to be attached to views that conform to `HSZoomableView`
 public class PanTiltGestureRecognizer: UIGestureRecognizer {
     /// The view in which is the gesture is operating
